@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Register - ToDo App{% endblock %}
+
+{% block content %}
+
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-sm p-4" style="width: 100%; max-width: 420px;">
+      
+      <h3 class="text-center mb-3">Create Account</h3>
+      <p class="text-center text-muted mb-4">
+        Start managing your tasks easily
+      </p>
+
+      <form method="post">
+        {% csrf_token %}
+
+        {% for field in form %}
+          <div class="mb-3">
+            <label class="form-label">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+              <div class="text-danger small">{{ field.errors|striptags }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary w-100">
+          Register
+        </button>
+      </form>
+
+      <div class="text-center mt-3">
+        <span class="text-muted">Already have an account?</span>
+        <a href="{% url 'login' %}" class="text-decoration-none">Login</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
